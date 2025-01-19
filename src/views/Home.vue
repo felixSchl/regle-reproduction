@@ -1,41 +1,30 @@
 <script lang="ts" setup>
-import { z } from 'zod';
-import {ref,computed} from 'vue';
-import { useZodRegle} from '@regle/zod'
-import JSONViewer from '../components/JSONViewer.vue'
-import Drawer from '../components/Drawer.vue'
+import { z } from 'zod'
+import { ref, computed, type UnwrapRef } from 'vue'
+import { useZodRegle } from '@regle/zod'
 
-const data = ref<
-  Partial<{
-    condition: boolean;
-    nested: {
-      list: {
-        name: string;
-      }[];
-    };
-  }>
->({});
-
+// TODO can we infer this? or if keep any, infer the references in the template?
+const data = ref<any>({})
 const schema = computed(() => {
-  if (data.value.condition === true) {
-    return z.object({
-      condition: z.boolean(),
-      nested: z.object({
-        list: z.array(
-          z.object({
-            name: z.string(),
-          }),
-        ),
-      }),
-    });
-  }
   return z.object({
     condition: z.boolean(),
-  });
-});
+    ...(data.value.condition === true && {
+      nested: z.object({
+        list: z
+          .array(
+            z.object({
+              name: z.string(),
+            }),
+          )
+          .default([]),
+      }),
+    }),
+  })
+})
+type Schema = UnwrapRef<typeof schema>
 
-const rewardEarly = ref(true);
-const { r$ } = useZodRegle(data, schema, { rewardEarly });
+const rewardEarly = ref(true)
+const { r$ } = useZodRegle<z.infer<Schema>, Schema>(data, schema, { rewardEarly })
 </script>
 
 <template>
@@ -57,20 +46,13 @@ const { r$ } = useZodRegle(data, schema, { rewardEarly });
     <button
       @click="
         () => {
-          const list = r$.$fields.nested?.$fields.list?.$value ?? [];
-          r$.$fields.nested.$fields.list.$value = list;
-          list.push({ name: 'john' });
+          if (r$.$fields.nested) {
+            ;(r$.$fields.nested.$fields.list.$value ??= []).push({ name: 'John' })
+          }
         }
       "
     >
       add ({{ r$.$fields.nested?.$fields.list?.$value?.length }})
     </button>
-  
-    <!--
-    <Drawer>
-      <JSONViewer :data="r$" />
-    </Drawer>
-    -->
   </div>
 </template>
-
