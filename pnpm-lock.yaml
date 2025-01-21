@@ -4,6 +4,13 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  valibot: 1.0.0-beta.11
+  '@___regle/nuxt': link:../regle/packages/nuxt
+  '@___regle/zod': link:../regle/packages/zod
+  '@___regle/core': link:../regle/packages/core
+  '@___regle/schemas': link:../regle/packages/schemas
+
 importers:
 
   .:
@@ -12,14 +19,14 @@ importers:
         specifier: 2.1.7
         version: 2.1.7
       '@regle/core':
-        specifier: 0.5.4
-        version: 0.5.4(vue@3.5.13(typescript@5.6.3))
+        specifier: 0.7.0
+        version: 0.7.0(vue@3.5.13(typescript@5.6.3))
       '@regle/rules':
-        specifier: 0.5.4
-        version: 0.5.4(vue@3.5.13(typescript@5.6.3))
-      '@regle/zod':
-        specifier: 0.5.4
-        version: 0.5.4(vue@3.5.13(typescript@5.6.3))(zod@3.24.1)
+        specifier: 0.7.0
+        version: 0.7.0(vue@3.5.13(typescript@5.6.3))
+      '@regle/schemas':
+        specifier: 0.7.0
+        version: 0.7.0(valibot@1.0.0-beta.11(typescript@5.6.3))(vue@3.5.13(typescript@5.6.3))(zod@3.24.1)
       '@vueuse/core':
         specifier: 12.0.0
         version: 12.0.0(typescript@5.6.3)
@@ -32,6 +39,9 @@ importers:
       vue-router:
         specifier: ^4.4.5
         version: 4.5.0(vue@3.5.13(typescript@5.6.3))
+      zod:
+        specifier: ^3.24.1
+        version: 3.24.1
     devDependencies:
       '@tailwindcss/forms':
         specifier: 0.5.9
@@ -568,18 +578,19 @@ packages:
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
 
-  '@regle/core@0.5.4':
-    resolution: {integrity: sha512-//g0tMPNZ/+qHxgdOO6F34O1fUAmjAxcrKdG6S82Ru2RMM8hTlwVKKpmKgWGwmlr1HtW7AJn4VY/ZwQidxvIIQ==}
+  '@regle/core@0.7.0':
+    resolution: {integrity: sha512-XDh/sIQezmEhGYbAARQLmg8LPknN607MfOd2ZGyCmT9q0uTM5u9BlJMDImXnsQffL8sXqUUk5bkX/fFgQAwuLw==}
     peerDependencies:
       vue: ^3.3.0
 
-  '@regle/rules@0.5.4':
-    resolution: {integrity: sha512-nUQWuA2NThmyJD/WvKruAWfHB9sOzV/omECdGTmU60pWLSxUhK7ExLjq1/gwNRM4qcMPFyqlCUrtafZbKdrV8A==}
+  '@regle/rules@0.7.0':
+    resolution: {integrity: sha512-W+3dDeAoby2RNTVHa8z3q8gIqwynujchZSqDqZ6drzL24JH/zKwLrqvMPeKGDaJYvZcQ6evhLk77Wcoy6v1bZQ==}
 
-  '@regle/zod@0.5.4':
-    resolution: {integrity: sha512-ZUGtWBTAjmGzVCPJnN5ZkC825UczBkgpykHMt4chm8PLB6DS4763pw8x/6kajn8lRQsEr6VhXgnStPmDtaECqg==}
+  '@regle/schemas@0.7.0':
+    resolution: {integrity: sha512-kOoG7l8Np6w+4wc7drpEyXBkL4aPs75/P4FPek1oevlyq5GXk0fPleLmQ3MXwJaCN1AUJITRal3rD5Q2PX+jPA==}
     peerDependencies:
-      zod: ^3
+      valibot: 1.0.0-beta.11
+      zod: ^3.24.0
 
   '@rollup/pluginutils@5.1.3':
     resolution: {integrity: sha512-Pnsb6f32CD2W3uCaLZIzDmeFyQ2b8UWMFI7xtwUezpcGBDVDW6y9XgAWIlARiGAo6eNF5FK5aQTr0LFyNyqq5A==}
@@ -691,6 +702,9 @@ packages:
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
+
+  '@standard-schema/spec@1.0.0-rc.0':
+    resolution: {integrity: sha512-DcY/ICFcZIESNTLTexIT108HOqd1FtxsiLV4ZYGluySWyjF6TZ6troNyXjiqoHU6j0wN3A6SmYnTA5CHQp9blw==}
 
   '@tailwindcss/forms@0.5.9':
     resolution: {integrity: sha512-tM4XVr2+UVTxXJzey9Twx48c1gcxFStqn1pQz0tRsX8o3DvxhN5oY5pvyAbUx7VTaZxpej4Zzvc6h+1RJBzpIg==}
@@ -1907,6 +1921,14 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  valibot@1.0.0-beta.11:
+    resolution: {integrity: sha512-Ztl5Iks1Ql7Z6CwkS5oyqguN3G8tmUiNlsHpqbDt6DLMpm+eu+n8Q7f921gI3uHvNZ8xDVkd4cEJP5t+lELOfw==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   vite-hot-client@0.2.4:
     resolution: {integrity: sha512-a1nzURqO7DDmnXqabFOliz908FRmIppkBKsJthS8rbe8hBEXwEwe4C3Pp33Z1JoFCYfVL4kTOMLKk0ZZxREIeA==}
     peerDependencies:
@@ -2491,20 +2513,22 @@ snapshots:
 
   '@polka/url@1.0.0-next.28': {}
 
-  '@regle/core@0.5.4(vue@3.5.13(typescript@5.6.3))':
+  '@regle/core@0.7.0(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       vue: 3.5.13(typescript@5.6.3)
 
-  '@regle/rules@0.5.4(vue@3.5.13(typescript@5.6.3))':
+  '@regle/rules@0.7.0(vue@3.5.13(typescript@5.6.3))':
     dependencies:
-      '@regle/core': 0.5.4(vue@3.5.13(typescript@5.6.3))
+      '@regle/core': 0.7.0(vue@3.5.13(typescript@5.6.3))
     transitivePeerDependencies:
       - vue
 
-  '@regle/zod@0.5.4(vue@3.5.13(typescript@5.6.3))(zod@3.24.1)':
+  '@regle/schemas@0.7.0(valibot@1.0.0-beta.11(typescript@5.6.3))(vue@3.5.13(typescript@5.6.3))(zod@3.24.1)':
     dependencies:
-      '@regle/core': 0.5.4(vue@3.5.13(typescript@5.6.3))
-      '@regle/rules': 0.5.4(vue@3.5.13(typescript@5.6.3))
+      '@regle/core': 0.7.0(vue@3.5.13(typescript@5.6.3))
+      '@regle/rules': 0.7.0(vue@3.5.13(typescript@5.6.3))
+      '@standard-schema/spec': 1.0.0-rc.0
+      valibot: 1.0.0-beta.11(typescript@5.6.3)
       zod: 3.24.1
     transitivePeerDependencies:
       - vue
@@ -2577,6 +2601,8 @@ snapshots:
   '@sec-ant/readable-stream@0.4.1': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
+
+  '@standard-schema/spec@1.0.0-rc.0': {}
 
   '@tailwindcss/forms@0.5.9(tailwindcss@3.4.16)':
     dependencies:
@@ -3843,6 +3869,10 @@ snapshots:
       punycode: 2.3.1
 
   util-deprecate@1.0.2: {}
+
+  valibot@1.0.0-beta.11(typescript@5.6.3):
+    optionalDependencies:
+      typescript: 5.6.3
 
   vite-hot-client@0.2.4(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(sass@1.82.0)(yaml@2.6.1)):
     dependencies:

@@ -14,13 +14,14 @@
   },
   "dependencies": {
     "@andypf/json-viewer": "2.1.7",
-    "@regle/core": "0.5.4",
-    "@regle/rules": "0.5.4",
-    "@regle/zod": "0.5.4",
+    "@regle/core": "0.7.0",
+    "@regle/rules": "0.7.0",
+    "@regle/schemas": "0.7.0",
     "@vueuse/core": "12.0.0",
     "pinia": "^2.2.6",
     "vue": "^3.5.13",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "0.5.9",
@@ -42,5 +43,12 @@
     "vite": "^6.0.1",
     "vite-plugin-vue-devtools": "^7.6.5",
     "vue-tsc": "^2.1.10"
+  },
+  "resolutions": {
+    "valibot": "1.0.0-beta.11",
+    "@___regle/nuxt": "link:../regle/packages/nuxt",
+    "@___regle/zod": "link:../regle/packages/zod",
+    "@___regle/core": "link:../regle/packages/core",
+    "@___regle/schemas": "link:../regle/packages/schemas"
   }
 }
